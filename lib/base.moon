@@ -1,20 +1,19 @@
--- Base class that represents a Porter-based application
-class App
-    new: (meta) =>
-        @bundle = {
-            name: meta.name,
-            version: meta.version,
-            description: meta.description,
-            invocationImage: "",
-            mixins: {},
-            install: {},
-            upgrade: {},
-            uninstall: {},
-            credentials: {}
-        }
+-- base.moon
 
-    set_image: (image) =>
-        @bundle.invocationImage = image
+-- App is a base class that represents a Porter-based application
+class App
+    new: (conf) =>
+        @bundle = {
+            name:            conf.meta.name
+            version:         conf.meta.version
+            description:     conf.meta.description
+            invocationImage: conf.registry.host.."/"..conf.registry.repo..":"..conf.registry.tag
+            mixins:          {}
+            install:         {}
+            upgrade:         {}
+            uninstall:       {}
+            credentials:     {}
+        }
 
     add_mixin: (mixin) =>
         table.insert(@bundle.mixins, mixin)

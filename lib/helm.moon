@@ -6,7 +6,7 @@ class HelmRelease
 
     install: =>
         @_mixin_format({
-            description: "Install "..@name.." ("..@chart.." version "..@version..")",
+            description: "Install Helm release \""..@name.."\" ("..@chart.." "..@version..")",
             name: @name,
             chart: @chart,
             version: @version
@@ -15,7 +15,7 @@ class HelmRelease
 
     upgrade: =>
         @_mixin_format({
-            description: "Upgrade "..@name.." ("..@chart.." version "..@version..")",
+            description: "Upgrade Helm release \""..@name.."\" ("..@chart.." "..@version..")",
             name: @name,
             chart: @chart,
             version: @version
@@ -23,7 +23,7 @@ class HelmRelease
 
     uninstall: =>
         @_mixin_format({
-            description: "Uninstall "..@name.." ("..@chart.." version "..@version..")",
+            description: "Uninstall Helm release \""..@name.."\" ("..@chart.." "..@version..")",
             releases: {@name},
             purge: true
         })

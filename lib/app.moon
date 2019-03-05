@@ -1,17 +1,20 @@
 -- Base class that represents a Porter-based application
 class App
-    new: (name, version, description, image) =>
+    new: (meta) =>
         @bundle = {
-            name: name,
-            version: version,
-            description: description,
-            invocationImage: image,
+            name: meta.name,
+            version: meta.version,
+            description: meta.description,
+            invocationImage: "",
             mixins: {},
             install: {},
             upgrade: {},
             uninstall: {},
             credentials: {}
         }
+
+    set_image: (image) =>
+        @bundle.invocationImage = image
 
     add_mixin: (mixin) =>
         table.insert(@bundle.mixins, mixin)

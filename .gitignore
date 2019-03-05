@@ -2,5 +2,6 @@
 Dockerfile
 bundle.json
 cnab/
+lib/*.lua
 porter.lua
 porter.yaml

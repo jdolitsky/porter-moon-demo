@@ -1,4 +1,8 @@
-name = "my-bundle"
+import helm_release from require "lib/helm"
+import App from require "lib/app"
+
+-- App metadata
+name = "myapp"
 version = "0.1.0"
 description = "this application is extremely important"
 
@@ -8,41 +12,14 @@ description = "this application is extremely important"
 registry_host = "docker.io"
 registry_repo = os.getenv("USER").."/"..name
 
--- Class that represents our app
-class MyApp
-    new: =>
-        @bundle = {
-            name: name,
-            version: version,
-            description: description,
-            invocationImage: registry_host.."/"..registry_repo..":"..version,
-            mixins: {},
-            install: {},
-            uninstall: {}
-            credentials: {
-                {
-                    name: "kubeconfig",
-                    path: "/root/.kube/config"
-                }
-            }
-        }
-
-    add_mixin: (mixin) =>
-        table.insert(@bundle.mixins, mixin)
-
-    add_install_step: (step) =>
-        table.insert(@bundle.install, step)
-
-    add_uninstall_step: (step) =>
-        table.insert(@bundle.uninstall, step)
-
--- Method that returns valid input for helm mixin
-helm_release = (c) ->
-    {helm: c}
-
--- Create bundle and modify
-app = MyApp!
+-- Create app and modify
+app = App!
+app\set_name(name)
+app\set_version(version)
+app\set_description(description)
+app\set_image(registry_host, registry_repo, version)
 app\add_mixin("helm")
+app\add_credentials("kubeconfig", "/root/.kube/config")
 
 release_name = "porter-hackmd-demo"
 

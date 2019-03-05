@@ -8,7 +8,7 @@ description = "this application is extremely important"
 
 -- Example of pushing to your personal Docker Hub account,
 -- assuming USER env var matches your Docker Hub username
--- (make sure you create the "my-bundle" repo ahead of time)
+-- (make sure you create the "myapp" repo ahead of time)
 registry_host = "docker.io"
 registry_repo = os.getenv("USER").."/"..name
 

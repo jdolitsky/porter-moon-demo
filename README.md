@@ -14,7 +14,6 @@ The file [`porter.moon`](./porter.moon) in this repo contains the bundle definit
 ```moon
 -- porter.moon 🌜💫
 
-import getenv from require("os")
 import MyCloudApp from require("lib/mycloudapp")
 
 name = "my-cloud-app"
@@ -28,7 +27,7 @@ config = {
     meta: {:name, :version, :description}
     registry: {
         host: "docker.io",
-        repo: getenv("USER").."/"..name
+        repo: os.getenv("USER").."/"..name
         tag: version.."-develop"
     }
 }

@@ -33,7 +33,8 @@ app\add_install_step(helm_release{
 
 app\add_uninstall_step(helm_release{
     description: "Uninstall hackmd ("..release_name..")",
-    name: release_name
+    releases: {release_name},
+    purge: true
 })
 
 -- Export bundle

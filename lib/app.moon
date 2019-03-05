@@ -1,28 +1,17 @@
--- Class that represents a Porter-based application
+-- Base class that represents a Porter-based application
 class App
-    new: =>
+    new: (name, version, description, image) =>
         @bundle = {
-            name: "",
-            version: "",
-            description: "",
-            invocationImage: "",
+            name: name,
+            version: version,
+            description: description,
+            invocationImage: image,
             mixins: {},
             install: {},
+            upgrade: {},
             uninstall: {},
             credentials: {}
         }
-
-    set_name: (name) =>
-        @bundle.name = name
-
-    set_version: (version) =>
-        @bundle.version = version
-
-    set_description: (description) =>
-        @bundle.description = description
-
-    set_image: (host, repo, tag) =>
-        @bundle.invocationImage = host.."/"..repo..":"..tag
 
     add_mixin: (mixin) =>
         table.insert(@bundle.mixins, mixin)
@@ -32,6 +21,9 @@ class App
 
     add_install_step: (step) =>
         table.insert(@bundle.install, step)
+
+    add_upgrade_step: (step) =>
+        table.insert(@bundle.upgrade, step)
 
     add_uninstall_step: (step) =>
         table.insert(@bundle.uninstall, step)

@@ -6,8 +6,7 @@
 
 This is a simple POC of authoring a [Porter](https://porter.sh/) bundle with [MoonScript](https://moonscript.org/).
 
-The application first launches an [Azure SQL](https://azure.microsoft.com/en-us/services/sql-database/) database, then deploys an instance of [HackMD](https://github.com/hackmdio/codimd) (CodiMD) using the db.
-
+The deploys an instance of [HackMD](https://github.com/hackmdio/codimd) (CodiMD) using the [Helm mixin](https://github.com/deislabs/porter-helm), backed by an [Azure SQL](https://azure.microsoft.com/en-us/services/sql-database/) database created using the [Azure mixin](https://github.com/deislabs/porter-azure).
 ## porter.moon
 
 The file [`porter.moon`](./porter.moon) in this repo contains the bundle definition:

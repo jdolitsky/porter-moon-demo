@@ -41,7 +41,7 @@ export bundle = MyCloudApp(config).bundle
 
 The `MyCloudApp` class (defined [here](./lib/mycloudapp.moon)) defines the all the different mixins, credentials, and actions for the bundle. 
 
-This is the resulting `porter.yaml` after conversion from MoonScript:
+This is the resulting `porter.yaml` after conversion from MoonScript/Lua:
 ```yaml
 credentials:
 - name: kubeconfig

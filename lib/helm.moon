@@ -1,10 +1,14 @@
 -- helm.moon
 
--- HelmRelease is a class for working with Helm releases that works with the Helm mixin
+-- HelmRelease is a class for working with Helm releases that plugs into the Helm mixin
 class HelmRelease
     _format: (o) => {helm: o}
 
     new: (@name, @chart, @version) =>
+        @values = {}
+
+    set_values: (values) =>
+        @values = values
 
     install: =>
         @_format({
@@ -12,6 +16,7 @@ class HelmRelease
             name:        @name
             chart:       @chart
             version:     @version
+            set:         @values
             replace:     true
         })
 
@@ -21,6 +26,7 @@ class HelmRelease
             name:        @name
             chart:       @chart
             version:     @version
+            set:         @values
         })
 
     uninstall: =>

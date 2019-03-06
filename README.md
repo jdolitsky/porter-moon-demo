@@ -42,31 +42,61 @@ This is the resulting `porter.yaml` after conversion from MoonScript/Lua:
 credentials:
 - name: kubeconfig
   path: /root/.kube/config
-description: ️right up to the cloud️
+description: ️takes us up to the cloud️, the moon even
 install:
+- azure:
+    description: Install azure postgres db "my-cloud-app-hackmd" (in eastus)
+    name: my-cloud-app-hackmd
+    parameters:
+      administratorLogin: myadminuser
+      administratorLoginPassword: myAdminPass123!
+      databaseName: hackmd
+      location: eastus
+      serverName: my-cloud-app-hackmd
+    resourceGroup: my-cloud-app-hackmd
+    type: postgres
 - helm:
     chart: stable/hackmd
-    description: Install helm release "my-cloud-app-hackmd" (stable/hackmd 1.0.1)
+    description: Install helm release "my-cloud-app-hackmd" (stable/hackmd 1.1.0)
     name: my-cloud-app-hackmd
     replace: true
-    version: 1.0.1
-invocationImage: docker.io/jdolitsky/porterdemo:0.1.1-develop
+    set:
+      persistence.enabled: false
+      postgresql.install: false
+      postgresql.postgresDatabase: hackmd
+      postgresql.postgresHost: my-cloud-app-hackmd.postgres.database.azure.com
+      postgresql.postgresPassword: myAdminPass123!
+      postgresql.postgresUser: myadminuser@my-cloud-app-hackmd.postgres.database.azure.com
+      replicaCount: 2
+      sessionSecret: abcde12345
+    version: 1.1.0
+invocationImage: docker.io/jdolitsky/my-cloud-app:0.1.3-develop
 mixins:
+- azure
 - helm
 name: my-cloud-app
 uninstall:
 - helm:
-    description: Uninstall helm release "my-cloud-app-hackmd" (stable/hackmd 1.0.1)
+    description: Uninstall helm release "my-cloud-app-hackmd" (stable/hackmd 1.1.0)
     purge: true
     releases:
     - my-cloud-app-hackmd
 upgrade:
 - helm:
     chart: stable/hackmd
-    description: Upgrade helm release "my-cloud-app-hackmd" (stable/hackmd 1.0.1)
+    description: Upgrade helm release "my-cloud-app-hackmd" (stable/hackmd 1.1.0)
     name: my-cloud-app-hackmd
-    version: 1.0.1
-version: 0.1.1
+    set:
+      persistence.enabled: false
+      postgresql.install: false
+      postgresql.postgresDatabase: hackmd
+      postgresql.postgresHost: my-cloud-app-hackmd.postgres.database.azure.com
+      postgresql.postgresPassword: myAdminPass123!
+      postgresql.postgresUser: myadminuser@my-cloud-app-hackmd.postgres.database.azure.com
+      replicaCount: 2
+      sessionSecret: abcde12345
+    version: 1.1.0
+version: 0.1.3
 ```
 
 ## How to use

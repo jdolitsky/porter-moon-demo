@@ -22,6 +22,12 @@ class AzurePostgreSQLDatabase
                 administratorLogin:         @username
                 administratorLoginPassword: @password
             }
+            outputs: {
+                {
+                    name: "POSTGRESQL_HOST"
+                    key:  "POSTGRESQL_HOST"
+                }
+            }
         })
 
 return {

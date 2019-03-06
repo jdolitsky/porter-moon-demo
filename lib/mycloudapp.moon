@@ -48,10 +48,13 @@ class MyCloudApp extends App
             "sessionSecret":               settings.hackmd.session.secret
             "persistence.enabled":         false
             "postgresql.install":          false
-            "postgresql.postgresHost":     azure_db_host
             "postgresql.postgresUser":     settings.hackmd.db.admin.username.."@"..azure_db_host
             "postgresql.postgresPassword": settings.hackmd.db.admin.password
             "postgresql.postgresDatabase": settings.hackmd.db.database
+            "postgresql.postgresHost":     azure_db_host
+            --"postgresql.postgresHost": {
+            --    source: "bundle.azure.outputs.POSTGRESQL_HOST"
+            --}
         })
 
         -- Add install steps

@@ -166,5 +166,11 @@
                 }
             ]
         }
-    ]
+    ],
+    "outputs": {
+        "POSTGRESQL_HOST": {
+            "type": "string",
+            "value": "[reference(parameters('serverName')).fullyQualifiedDomainName]"
+        }
+    }
 }

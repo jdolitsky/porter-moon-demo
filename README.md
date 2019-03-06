@@ -6,7 +6,7 @@
 
 This is a simple POC of authoring a [Porter](https://porter.sh/) bundle with [MoonScript](https://moonscript.org/).
 
-The deploys an instance of [HackMD](https://github.com/hackmdio/codimd) (CodiMD) using the [Helm mixin](https://github.com/deislabs/porter-helm), backed by an [Azure SQL](https://azure.microsoft.com/en-us/services/sql-database/) database created using the [Azure mixin](https://github.com/deislabs/porter-azure).
+The deploys an instance of [HackMD](https://github.com/hackmdio/codimd) (CodiMD) using the [Helm mixin](https://github.com/deislabs/porter-helm), backed by an [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/services/postgresql/) created using the [Azure mixin](https://github.com/deislabs/porter-azure).
 ## porter.moon
 
 The file [`porter.moon`](./porter.moon) in this repo contains the bundle definition:
@@ -103,19 +103,6 @@ version: 0.1.3
 
 The following commands can be run in the root of this repo after installing [moopo](https://github.com/jdolitsky/moopo) (a space-age Porter pre-processor that converts `porter.moon` into `porter.yaml`).
 
-### Build bundle
-
-Run this in an environment that is allowed to push the invocation image.
-
-```
-$ moopo build
-[moopo] Converting porter.moon to porter.lua... Done.
-[moopo] Converting porter.lua to porter.yaml... Done.
-Copying dependencies ===>
-Copying mixins ===>
-...
-```
-
 ### Install bundle
 
 ```
@@ -145,5 +132,18 @@ $ moopo run --action=uninstall
 [moopo] Converting porter.lua to porter.yaml... Done.
 executing porter uninstall configuration from porter.yaml
 Uninstall helm release "my-cloud-app-hackmd" (stable/hackmd 1.1.0)
+...
+```
+
+### Build and push bundle
+
+Run this in an environment that is allowed to push the invocation image.
+
+```
+$ moopo build
+[moopo] Converting porter.moon to porter.lua... Done.
+[moopo] Converting porter.lua to porter.yaml... Done.
+Copying dependencies ===>
+Copying mixins ===>
 ...
 ```

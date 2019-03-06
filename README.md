@@ -109,17 +109,10 @@ Run this in an environment that is allowed to push the invocation image.
 
 ```
 $ moopo build
-Built ./porter.moon
-Built ./lib/base.moon
-Built ./lib/helm.moon
-Built ./lib/mycloudapp.moon
+[moopo] Converting porter.moon to porter.lua... Done.
+[moopo] Converting porter.lua to porter.yaml... Done.
 Copying dependencies ===>
 Copying mixins ===>
-Copying mixin helm ===>
-Copying mixin porter ===>
-
-Generating Dockerfile =======>
-FROM quay.io/deis/lightweight-docker-go:v0.2.0
 ...
 ```
 
@@ -127,44 +120,30 @@ FROM quay.io/deis/lightweight-docker-go:v0.2.0
 
 ```
 $ moopo run --action=install
-Built ./porter.moon
-Built ./lib/base.moon
-Built ./lib/helm.moon
-Built ./lib/mycloudapp.moon
+[moopo] Converting porter.moon to porter.lua... Done.
+[moopo] Converting porter.lua to porter.yaml... Done.
 executing porter install configuration from porter.yaml
-Install helm release "my-cloud-app-hackmd" (stable/hackmd 1.0.1)
-/usr/local/bin/helm helm install --name my-cloud-app-hackmd stable/hackmd --version 1.0.1 --replace
-NAME:   my-cloud-app-hackmd
-LAST DEPLOYED: Tue Mar  5 04:59:12 2019
-NAMESPACE: default
-STATUS: DEPLOYED
+Install azure postgres db "my-cloud-app-hackmd" (in eastus)
+Starting deployment operations...
 ...
 ```
 
 ### Upgrade bundle
 ```
 $ moopo run --action=upgrade
-Built ./porter.moon
-Built ./lib/base.moon
-Built ./lib/helm.moon
-Built ./lib/mycloudapp.moon
+[moopo] Converting porter.moon to porter.lua... Done.
+[moopo] Converting porter.lua to porter.yaml... Done.
 executing porter upgrade configuration from porter.yaml
-Upgrade helm release "my-cloud-app-hackmd" (stable/hackmd 1.0.1)
-/usr/local/bin/helm helm upgrade my-cloud-app-hackmd stable/hackmd --version 1.0.1
-Release "my-cloud-app-hackmd" has been upgraded. Happy Helming!
+Upgrade helm release "my-cloud-app-hackmd" (stable/hackmd 1.1.0)
 ...
 ```
 
 ### Uninstall bundle
 ```
 $ moopo run --action=uninstall
-Built ./porter.moon
-Built ./lib/base.moon
-Built ./lib/helm.moon
-Built ./lib/mycloudapp.moon
+[moopo] Converting porter.moon to porter.lua... Done.
+[moopo] Converting porter.lua to porter.yaml... Done.
 executing porter uninstall configuration from porter.yaml
-Uninstall helm release "my-cloud-app-hackmd" (stable/hackmd 1.0.1)
-/usr/local/bin/helm helm delete --purge my-cloud-app-hackmd
-release "my-cloud-app-hackmd" deleted
-execution completed successfully!
+Uninstall helm release "my-cloud-app-hackmd" (stable/hackmd 1.1.0)
+...
 ```

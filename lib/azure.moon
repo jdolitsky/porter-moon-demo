@@ -30,6 +30,47 @@ class AzurePostgreSQLDatabase
             }
         })
 
+    upgrade: =>
+        @_format({
+            description:   "Upgrade azure postgres db \""..@name.."\" (in "..@location..")"
+            type:          "postgres"
+            name:          @name
+            resourceGroup: @name
+            parameters: {
+                serverName:                 @name
+                location:                   @location
+                databaseName:               @database
+                administratorLogin:         @username
+                administratorLoginPassword: @password
+            }
+            outputs: {
+                {
+                    name: "POSTGRESQL_HOST"
+                    key:  "POSTGRESQL_HOST"
+                }
+            }
+        })
+
+    uninstall: =>
+        @_format({
+            description:   "Uninstall azure postgres db \""..@name.."\" (in "..@location..")"
+            type:          "postgres"
+            name:          @name
+            resourceGroup: @name
+            parameters: {
+                serverName:                 @name
+                location:                   @location
+                databaseName:               @database
+                administratorLogin:         @username
+                administratorLoginPassword: @password
+            }
+            outputs: {
+                {
+                    name: "POSTGRESQL_HOST"
+                    key:  "POSTGRESQL_HOST"
+                }
+            }
+        })
 return {
     AzurePostgreSQLDatabase: AzurePostgreSQLDatabase
 }

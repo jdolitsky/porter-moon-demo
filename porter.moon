@@ -1,10 +1,10 @@
 -- porter.moon 🌜💫
 
-import MyCloudApp from require("lib/mycloudapp")
+import DevCluster from require("lib/cluster")
 
-name = "my-cloud-app"
-version = "0.1.4"
-description = "takes us up to the cloud, the moon even"
+name = "dev-cluster"
+version = "0.1.0"
+description = "a Kubernetes cluster with several useful apps installed"
 
 -- General configuration. Modify for your own registry. This pushes the
 -- invocation image to Docker Hub account/org based on the USER env var.
@@ -18,4 +18,4 @@ config = {
     }
 }
 
-export bundle = MyCloudApp(config).bundle
+export bundle = DevCluster(config).bundle
